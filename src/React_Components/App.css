@@ -57,6 +57,18 @@
   padding: 20px;
 }
 
+span {
+  line-height: 24px
+}
+
+.blank-space {
+  border: 2px black solid;
+  min-height: 24px;
+  box-sizing: border-box;
+  min-width: 100px;
+  display: inline-flex;
+}
+
 .answer {
   border: 2px black solid;
   min-height: 35px;
@@ -162,6 +174,7 @@ ul {
   text-align: center;
   border: 2px dashed rgba(0, 0, 0, 0.2);
   margin: 20px 0;
+  box-sizing: border-box;
   padding: 30px;
 }
 
