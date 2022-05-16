@@ -24,7 +24,7 @@ class DragAndDropText extends Component {
                     info: [
                         'Lorem',
                         'Lorem',
-                        'option_1',
+                        'Text 1',
                     ],
                     answer: "option_1"
                 },
@@ -51,9 +51,9 @@ class DragAndDropText extends Component {
                     info: [
                         'Lorem',
                         'Lorem',
-                        'Text 3',
+                        'Text 2',
                     ],
-                    answer: "option_3"
+                    answer: "option_2"
                 }
             ],
         }
