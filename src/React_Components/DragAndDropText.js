@@ -10,7 +10,9 @@ class DragAndDropText extends Component {
                 box: [],
                 box1: [],
                 box2: [],
-                box3: [],},
+                box3: [],
+                box4: [],
+            },
             textBoxes: [
                 {
                     name: 'none',
@@ -31,18 +33,27 @@ class DragAndDropText extends Component {
                     info: [
                         'Lorem',
                         'Lorem',
-                        'option_5',
+                        ' Text 3',
                     ],
-                    answer: "option_5"
+                    answer: "option_3"
                 },
                 {
                     name: 'box3',
                     info: [
                         'Lorem',
                         'Lorem',
-                        'option_6',
+                        'Text 4',
                     ],
-                    answer: "option_6"
+                    answer: "option_4"
+                },
+                {
+                    name: 'box4',
+                    info: [
+                        'Lorem',
+                        'Lorem',
+                        'Text 3',
+                    ],
+                    answer: "option_3"
                 }
             ],
         }
@@ -82,8 +93,8 @@ class DragAndDropText extends Component {
         const options = this.props.textOptions.filter(ques => ques.name === form)
         const ans = options.length > 0 ? options[0].answer: 'none';
         if (ans === 'none') return 'option';
-        if (ans === 'correct') return 'option correct'
-        if (ans === 'incorrect') return 'option incorrect';
+        if (ans === 'correct') return 'option correct no-margin'
+        if (ans === 'incorrect') return 'option incorrect no-margin';
     }
 
     render() {
@@ -100,7 +111,9 @@ class DragAndDropText extends Component {
             box: [],
             box1: [],
             box2: [],
-            box3: []}
+            box3: [],
+            box4: [],
+        }
 
         this.props.textOptions.forEach((option)=>{
             this.state.options[option.category].push(
@@ -137,9 +150,9 @@ class DragAndDropText extends Component {
 
         return (
             <div className="questions-container">
-                <h1>
-                    Place inside the box
-                </h1>
+                <h4>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                </h4>
                 <section>
                     <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
                             onDrop={(e)=>{this.onDrop(e, 'box', 'none')}}>

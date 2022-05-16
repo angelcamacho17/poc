@@ -1,7 +1,9 @@
 .App {
   text-align: center;
-  width: 95%;
-  margin: 15px auto;
+  width: 100%;
+  padding: 15px;
+  padding-top: 100px;
+  box-sizing: border-box;
 }
 
 .container-drag {
@@ -63,6 +65,7 @@
   top: 0;
   box-sizing: border-box;
   left: 0;
+  margin-right: 15px;
 }
 
 .circle {
@@ -90,9 +93,15 @@
 
 nav {
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   justify-content: space-around;
   align-items: center;
+  background-color: #fff;
+  box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f;
+  padding: 10px 15px;
 }
 
 button {
@@ -116,12 +125,26 @@ a {
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  padding: 20px;
+  padding: 20px 0;
+}
+
+.no-margin {
+  margin-right: 0 !important;
+}
+
+.text-game .divider {
+  position: relative;
+  width: 15px;
+  height: 100%;
+  content: none;
 }
 
 .box {
   position: relative;
   padding: 20px 30px;
+  width: 100%;
+  max-width: 200px;
+  margin: 10px;
   padding-top: 45px;
   border: 1px solid rgba(0, 0, 0, 0.6);
 }
@@ -135,20 +158,17 @@ ul {
   flex-flow: column;
   justify-content: space-between;
   width: 100%;
-  align-items: center;
+  /* align-items: center; */
   text-align: center;
   border: 2px dashed rgba(0, 0, 0, 0.2);
-  margin: 20px 0; 
-}
-
-section {
+  margin: 20px 0;
   padding: 30px;
 }
 
+
 .answers-wrapper {
   display: flex;
-  justify-content: space-around;
-  width: 800px;
+  width: 100%;
   align-items: center;
 }
 
@@ -159,6 +179,7 @@ section {
   text-align: center;
   border-radius: 5px;
   min-height: max-content;
+  margin-right: 15px;
 }
 
 .correct {
@@ -169,4 +190,21 @@ section {
 .incorrect {
   border: 2px rgb(173, 26, 26) dotted;
   background: rgb(255, 180, 180);
+}
+
+.text-game {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.text-game img {
+  height: 100%;
+  margin-right: 20px;
+}
+
+.text-game h4 {
+  max-width: 800px;
+  text-align: initial;
 }

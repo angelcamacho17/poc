@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 class TextGame extends Component {
     render() {
         return (
-            <div>
+            <div className="text-game">
+                <img src={require('./../assets/photosintesis.jpg')} />
                 <DragAndDropText/>
             </div>
         );

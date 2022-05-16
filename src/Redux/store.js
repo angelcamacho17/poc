@@ -31,12 +31,7 @@ export const store = createStore(
             {id: 1, name:"option_1", category:"box", answer: 'none', text: 'text 1'},
             {id: 2, name:"option_2", category:"box", answer: 'none', text: 'text 2'},
             {id: 3, name:"option_3", category:"box", answer: 'none', text: 'text 3'},
-            {id: 4, name:"option_4", category:"box", answer: 'none', text: 'text 4'},
-            {id: 5, name:"option_5", category:"box", answer: 'none', text: 'text 5'},
-            {id: 6, name:"option_6", category:"box", answer: 'none', text: 'text 6'},
-            {id: 7, name:"option_7", category:"box", answer: 'none', text: 'text 7'},
-            {id: 8, name:"option_8", category:"box", answer: 'none', text: 'text 8'},
-            {id: 9, name:"option_9", category:"box", answer: 'none', text: 'text 9'}
+            {id: 4, name:"option_4", category:"box", answer: 'none', text: 'text 4'}
         ]
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
