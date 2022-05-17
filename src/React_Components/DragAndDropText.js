@@ -6,13 +6,7 @@ class DragAndDropText extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            options:  {
-                box: [],
-                box1: [],
-                box2: [],
-                box3: [],
-                box4: [],
-            },
+            options:  { },
             textBoxes: [
                 {
                     name: 'none',
@@ -100,13 +94,6 @@ class DragAndDropText extends Component {
     render() {
         let boxes = []
 
-        // let options = {
-        //     box: [],
-        //     box1: [],
-        //     box2: [],
-        //     box3: [],
-        // }
-
         this.state.options =  {
             box: [],
             box1: [],
@@ -115,6 +102,7 @@ class DragAndDropText extends Component {
             box4: [],
         }
 
+        // OPTIONS TO PLACE INSIDE THE BOXES, MARKED AS DRAGGABLE
         this.props.textOptions.forEach((option)=>{
             this.state.options[option.category].push(
                 <div key={option.name} 
@@ -127,6 +115,7 @@ class DragAndDropText extends Component {
             );
         })
 
+        // BUILDING OF BOXES WITH THE OPTONS OBJECTS UPDATED
         this.state.textBoxes.forEach((box)=>{
             if (box.info.length > 0) {
                 boxes.push(
@@ -154,6 +143,7 @@ class DragAndDropText extends Component {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 </h4>
                 <section>
+                    {/* MAIN WRAPPER OF OPTIONS*/}
                     <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
                             onDrop={(e)=>{this.onDrop(e, 'box', 'none')}}>
                         {this.state.options.box}

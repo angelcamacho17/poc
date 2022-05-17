@@ -6,12 +6,7 @@ class DragAndDropBlankSpace extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            options:  {
-                text: [],
-                text1: [],
-                text2: [],
-                text3: [],
-            },
+            options: {},
             textBoxes: [
                 {
                     name: 'text',
@@ -49,6 +44,7 @@ class DragAndDropBlankSpace extends Component {
         }
     }
 
+    // EMIT ACTIONS
     onDrop = (ev, cat, answer) => {
         this.checkIfBoxIsEmpty(cat)
         let name = ev.dataTransfer.getData("name");
@@ -79,6 +75,7 @@ class DragAndDropBlankSpace extends Component {
             text3: [],
         }
 
+        // OPTIONS TO PLACE INSIDE THE BOXES, MARKED AS DRAGGABLE
         this.props.blankOptions.forEach((option)=>{
             this.state.options[option.category].push(
                 <div key={option.name} 
@@ -91,12 +88,13 @@ class DragAndDropBlankSpace extends Component {
             );
         })
 
+        // BUILDING OF BOXES WITH THE OPTONS OBJECTS UPDATED
         this.state.textBoxes.forEach((paragrah, index)=>{
             if (paragrah.text.length > 0) {
                 let i = 0;
                 let paragrahParts = paragrah.text.split('*');
                 boxes.push(
-                    <div>
+                    <div key={paragrah.name +'up'+ index}>
                         { paragrahParts.map((part, index) => {
                             if (part[0] !== '_') {
                                 return <span key={paragrah.name + index}>
@@ -120,6 +118,7 @@ class DragAndDropBlankSpace extends Component {
         return (
             <div className="questions-container">
                 <section>
+                    {/* MAIN WRAPPER OF OPTIONS*/}
                     <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
                             onDrop={(e)=>{this.onDrop(e, 'text', 'none')}}>
                         {this.state.options.text}
