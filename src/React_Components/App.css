@@ -221,3 +221,59 @@ ul {
   max-width: 800px;
   text-align: initial;
 }
+
+.author-form {
+  width: 80%;
+  border: 1px solid #404040;
+  border-radius: 10px;
+  height: 250px;
+  margin-bottom: 60px;
+}
+
+.author-form input {
+  height: calc(100% - 40px);
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 20px;
+  border: none;
+  border-radius: 10px;
+}
+
+.author-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.author-form .form-header {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.author-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 32px;
+  margin-bottom: 60px;
+}
+
+.author-options input {
+  height: 100%;
+  width: 70%;
+}
+
+.author-container button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgb(156, 0, 156);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}

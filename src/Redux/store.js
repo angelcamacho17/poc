@@ -3,6 +3,7 @@ import submittedValueReducer from './reducers/submittedValueReducer';
 import checkResponseReducer from './reducers/checkResponseReducer';
 import textOptionsReducer from './reducers/textOptionsReducer';
 import blankSpaceReducer from './reducers/blankSpacesReduce';
+import authorReducer from './reducers/authorReducer';
 
 // combineReducers takes in multiple reducers, and returns a single reducer to be used in the createStore(...) function.
 // combineReducers takes in multiple 'key : value' pairs to combine the reducers.
@@ -11,7 +12,8 @@ const allReducers = combineReducers({
     submittedValue: submittedValueReducer,
     checkResponse: checkResponseReducer,
     textOptions: textOptionsReducer,
-    blankOptions: blankSpaceReducer
+    blankOptions: blankSpaceReducer,
+    authorOptions: authorReducer
 });
 
 // createStore takes in 3 parameters: 1. Reducer 2. preloadedState 3. Enhancer.
@@ -40,7 +42,17 @@ export const store = createStore(
             {id: 2, name:"option_2", category:"text", answer: 'none', text: 'blank 2'},
             {id: 3, name:"option_3", category:"text", answer: 'none', text: 'blank 3'},
             {id: 4, name:"option_4", category:"text", answer: 'none', text: 'blank 4'}
-        ]
+        ],
+        authorOptions: {
+            textBoxes: [
+                {
+                    name: 'text',
+                    text: '',
+                    answer: ""
+                }
+            ],
+            answers: []
+        }
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
