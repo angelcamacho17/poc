@@ -223,57 +223,126 @@ ul {
 }
 
 .author-form {
-  width: 80%;
+  width: 100%;
   border: 1px solid #404040;
   border-radius: 10px;
   height: 250px;
   margin-bottom: 60px;
 }
 
-.author-form input {
-  height: calc(100% - 40px);
+.author-form textarea {
+  height: calc(100% - 56px);
   width: 100%;
   box-sizing: border-box;
   padding-left: 20px;
   border: none;
   border-radius: 10px;
+  font-size: 22px;
 }
 
 .author-container {
   display: flex;
-  flex-flow: column;
-  align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.author-form .form-header {
-  background: rgba(0, 0, 0, 0.3);
+.form-header {
+  background: rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  font-size: 26px;
 }
 
 .author-options {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+}
+
+.author-options-form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 32px;
-  margin-bottom: 60px;
 }
 
-.author-options input {
+.preview-section .boxes-wrapper {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top: none;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.option-wrapper {
+  padding: 10px;
+  padding-top: 20px;
+  border: 2px dashed rgba(0, 0, 0, 0.3);
+  border-top: none;
+  border-radius: 10px;
+}
+
+.author-container .creation-section {
+  width: 50%;
+  padding: 0 10px;
+}
+
+.author-container .preview-section {
+  height: 100%;
+  width: 50%;
+  padding: 0 10px;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.preview-section .question-preview {
+  width: 100%;
+}
+
+.author-options .option-input {
   height: 100%;
   width: 70%;
+  font-size: 22px;
 }
 
-.author-container button {
+.author-container .button {
   padding: 10px 20px;
   border-radius: 10px;
   background: rgb(156, 0, 156);
   color: white;
   font-size: 16px;
   font-weight: bold;
+  width: 100%;
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+}
+
+.author-container .radio {
+  width: 22px;
+  height: 22px;
+  margin-right: 25px;
+}
+
+.author-container .radio-label {
+  font-size: 28px !important;
+}
+
+.accent {
+  background: transparent !important;
+  color: rgb(156, 0, 156) !important;
+  border: 3px solid rgb(156, 0, 156) !important;
+  width: fit-content !important;
+}
+
+.radio-wrapper {
+  display: flex;
+  align-items: center;
 }

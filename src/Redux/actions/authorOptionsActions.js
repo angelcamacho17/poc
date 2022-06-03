@@ -3,6 +3,14 @@ export const AUTHOR_OPTION_INCORRECT = 'AUTHOR_OPTION_INCORRECT';
 export const AUTHOR_OPTION_NONE = 'AUTHOR_OPTION_NONE';
 export const AUTHOR_ADD_OPTION = 'AUTHOR_ADD_OPTION';
 export const AUTHOR_ADD_QUESTION = 'AUTHOR_ADD_QUESTION';
+export const AUTHOR_SET_CORRECT_ANSWER = 'AUTHOR_SET_CORRECT_ANSWER';
+
+
+export const authorSetCorrectAnswer = (obj) => ({
+    type: AUTHOR_SET_CORRECT_ANSWER,
+    option: obj.option,
+    name: obj.name
+})
 
 export const authorAddQuestion= (obj) => ({
     type: AUTHOR_ADD_QUESTION,

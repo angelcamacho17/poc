@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { authorOptionCorrect, authorOptionIncorrect, authorOptionNone, authorAddOption, authorAddQuestion } from '../Redux/actions/authorOptionsActions';
+import { authorOptionCorrect, authorOptionIncorrect, authorSetCorrectAnswer, authorOptionNone, authorAddOption, authorAddQuestion } from '../Redux/actions/authorOptionsActions';
 import { connect } from 'react-redux';
+import { Form } from "react-bootstrap";
 
 class DragAndDropAuthor extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class DragAndDropAuthor extends Component {
         this.state = {
             question: '',
             answer: '',
-            options : []
+            options : [],
             // textBoxes: [
             //     // {
             //     //     name: 'text',
@@ -21,17 +22,44 @@ class DragAndDropAuthor extends Component {
             //     //     answers: 'option_1',
             //     // },
             // ],
-        }
+            campaign: 'standard',
+            checked: 1
+        };
+        this.campaign_types = [
+            {id: 1, campaign_type: 'normal'},
+            {id: 2, campaign_type: 'standard'},
+            {id: 3, campaign_type: 'automated'},
+        ];
 
         this.onDragStart =  this.onDragStart.bind(this);
         this.onDragOver =  this.onDragOver.bind(this);
         this.onDrop =  this.onDrop.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.createQuiz = this.createQuiz.bind(this);
         this.addAnswer = this.addAnswer.bind(this);
         this.addQuestion = this.addQuestion.bind(this);
+        this.isCorrect = this.isCorrect.bind(this);
+        this.setCorrectAnswer = this.setCorrectAnswer.bind(this);
     }
 
+    handleChangeCompanyType = (event, index) => {
+        console.log(this.campaign_types[index].campaign_type, 'campaign_type');
+        let value = this.campaign_types[index].campaign_type;
+        this.setState({campaign: value, checked: index})
+    };
+
+    setCorrectAnswer = (option, name) => {
+        this.props.addCorrectAnswer({option, name})
+        // $event.stopImmediatePropagation();
+    }
+
+    isCorrect = (name) => {
+        if (this.props.authorOptions.textBoxes.length>1){
+            return this.props.authorOptions.textBoxes[1].answer === name;
+        } else {
+            return false;
+        }
+    }
+ 
     addQuestion = () => {
         this.props.onCreateQuestion({ text: this.state.question})
         this.setState({
@@ -39,15 +67,12 @@ class DragAndDropAuthor extends Component {
         })
     }
 
-    addAnswer = () => {
+    addAnswer = (err) => {
+        err.preventDefault();
         this.props.onAdd({ category:"text", answer: 'none', text: this.state.answer})
         this.setState({
             answer: ''
         })
-    }
-
-    createQuiz = () => {
-
     }
 
     onDragStart = (ev, name) => {
@@ -59,7 +84,7 @@ class DragAndDropAuthor extends Component {
     }
 
     checkIfBoxIsEmpty = (cat) => {
-        if (this.state.options[cat].length > 0) {
+        if (this.state.options[cat] && this.state.options[cat].length > 0) {
             this.props.onClear(this.state.options[cat][0].key, cat)
         }
     }
@@ -104,6 +129,9 @@ class DragAndDropAuthor extends Component {
         // OPTIONS TO PLACE INSIDE THE BOXES, MARKED AS DRAGGABLE
         this.props.authorOptions.answers.forEach((option)=>{
             if (option) {
+                console.log('option ', option)
+                console.log('option.category ', option.category)
+                console.log('this.state.options ', this.state.options)
                 this.state.options[option.category].push(
                     <div key={option.name} 
                         onDragStart = {(e) => this.onDragStart(e, option.name)}
@@ -118,7 +146,6 @@ class DragAndDropAuthor extends Component {
 
         // BUILDING OF BOXES WITH THE OPTONS OBJECTS UPDATED
         this.props.authorOptions.textBoxes.forEach((paragrah, index)=>{
-            console.log('HERE ', paragrah)
             if (paragrah.text.length > 0) {
                 let i = 0;
                 let paragrahParts = paragrah.text.split('*');
@@ -130,11 +157,11 @@ class DragAndDropAuthor extends Component {
                                     {part}
                                 </span>
                             } else {
-                                const cat = part.replace(/_/g, "")
+                                const cat = 'text1'
                                 return <span key={cat}
                                         className="blank-space"
                                         onDragOver={(e)=>this.onDragOver(e)}
-                                        onDrop={(e)=>{this.onDrop(e, cat, paragrah.answers[cat])}}>
+                                        onDrop={(e)=>{this.onDrop(e, cat, paragrah.answer)}}>
                                           {this.state.options[cat]}
                                 </span>
                             }
@@ -147,39 +174,71 @@ class DragAndDropAuthor extends Component {
         return (
             <div className="author-container">
                 {/* MAIN WRAPPER OF OPTIONS*/} 
-                <form className="author-form">
-                    <div className="form-header">
-                        Enter question
+                <div className="creation-section">
+                    <form className="author-form">
+                        <div className="form-header">
+                            Enter question
+                        </div>
+                        <textarea
+                            type="text"
+                            value={this.state.question}
+                            name="question"
+                            placeholder="Lorem ipsum dolor sit amet, consectetur *____* elit,"
+                            onChange={this.onChangeHandler}
+                            maxLength="255"
+                            rows="4"
+                        ></textarea>
+                    </form>
+                    
+                    <div className="author-options">
+                        <form onSubmit={this.addAnswer} className="author-options-form">
+                            <input
+                                className="option-input"
+                                type="text"
+                                name="answer"
+                                value={this.state.answer}
+                                placeholder="Option 1"
+                                onChange={this.onChangeHandler}
+                            />
+                            <button type="submit" className="button accent">
+                                Add option
+                            </button>
+                        </form>
+                        {this.props.authorOptions.answers.length>0 && <div className="option-wrapper">
+                            {this.props.authorOptions.answers.map((answer, index) => (
+                                <div key={index + answer.name} className="radio-wrapper">
+                                    <input
+                                        className="radio"
+                                        type="radio"
+                                        value={answer.name}
+                                        checked={this.isCorrect(answer.name)}
+                                        onChange={(e)=>{}}
+                                        onClick={(e)=>this.setCorrectAnswer(answer.name, 'text1')}
+                                    />
+                                    <label className="radio-label">
+                                        {answer.text}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>}
                     </div>
-                    <input
-                        type="text"
-                        name="question"
-                        placeholder="Lorem ipsum dolor sit amet, consectetur _____ elit,"
-                        onChange={this.onChangeHandler}
-                    />
-                </form>
-                <form className="author-options">
-                    <input
-                        type="text"
-                        name="answer"
-                        value={this.state.answer}
-                        placeholder="Option 1"
-                        onChange={this.onChangeHandler}
-                    />
-                </form>
-                <button onClick={this.addAnswer}>
-                    Add option
-                </button>
-                <button onClick={this.addQuestion}>
-                    Create quiz
-                </button>
-            
-                <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
-                        onDrop={(e)=>{this.onDrop(e, 'text', 'none')}}>
-                    {this.state.options.text}
+                    <button onClick={this.addQuestion} className="button">
+                        Create quiz
+                    </button>
                 </div>
-                <div className="boxes-wrapper" >
-                    {boxes}
+                <div className="preview-section">
+                    <div className="question-preview">
+                        <div className="form-header">
+                            Question
+                        </div>
+                        <div className="boxes-wrapper" >
+                            {boxes}
+                        </div>
+                    </div>
+                    <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
+                            onDrop={(e)=>{this.onDrop(e, 'text', 'none')}}>
+                        {this.state.options.text}
+                    </div>
                 </div>
             </div>
         )
@@ -199,7 +258,8 @@ const mapActionsToProps = {
     onCheckIncorrect: authorOptionIncorrect,
     onClear: authorOptionNone,
     onAdd: authorAddOption,
-    onCreateQuestion: authorAddQuestion
+    onCreateQuestion: authorAddQuestion,
+    addCorrectAnswer: authorSetCorrectAnswer
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(DragAndDropAuthor);

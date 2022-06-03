@@ -126,6 +126,7 @@ class DragAndDropBlankSpace extends Component {
                     <div className="boxes-wrapper" >
                         {boxes}
                     </div>
+
                 </section>
             </div>
         )

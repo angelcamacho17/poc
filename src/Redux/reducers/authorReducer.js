@@ -1,10 +1,30 @@
-import { AUTHOR_OPTION_CORRECT, AUTHOR_OPTION_INCORRECT, AUTHOR_OPTION_NONE, AUTHOR_ADD_OPTION, AUTHOR_ADD_QUESTION } from '../actions/authorOptionsActions';
+import { AUTHOR_OPTION_CORRECT, AUTHOR_SET_CORRECT_ANSWER, AUTHOR_OPTION_INCORRECT, AUTHOR_OPTION_NONE, AUTHOR_ADD_OPTION, AUTHOR_ADD_QUESTION } from '../actions/authorOptionsActions';
 
 // null is set as the default value here for state, because Redux will complain if state is undefined. 
 // You can set initial state here, but it is recommended on the Redux documentation to preload the state within the redux store. 
 // https://redux.js.org/recipes/structuring-reducers/initializing-state
 export default function authorReducer(state =  null, action) {
-    switch (action.type) {
+    console.log('here')
+    switch (action.type) { 
+        case AUTHOR_SET_CORRECT_ANSWER:{
+            console.log('here down')
+            return {
+                ...state,
+                textBoxes: state.textBoxes.map(textBox => {
+                    const newText = {
+                        ...textBox,
+                        answer: action.option,
+                    }
+                        if (textBox.name === action.name) {
+                            return newText;
+                        } else {
+                            return textBox
+                        }
+                    }
+                )
+            }
+        }
+
         case AUTHOR_ADD_QUESTION: 
             return {
                 answers: state.answers,
@@ -13,7 +33,7 @@ export default function authorReducer(state =  null, action) {
                     {
                         name: 'text' + state.textBoxes.length,
                         text: action.text,
-                        answers: ''
+                        answer: ''
                     }
                 ]
             }
