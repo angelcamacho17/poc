@@ -7,7 +7,6 @@ export default function authorReducer(state =  null, action) {
     console.log('here')
     switch (action.type) { 
         case AUTHOR_SET_CORRECT_ANSWER:{
-            console.log('here down')
             return {
                 ...state,
                 textBoxes: state.textBoxes.map(textBox => {

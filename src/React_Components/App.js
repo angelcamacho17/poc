@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>
+        {/* <header>
           <nav>
             <button>
               <Link to="/">Forms game</Link>
@@ -42,10 +42,10 @@ class App extends Component {
               <Link to="author">Author</Link>
             </button>
           </nav>
-        </header>
+        </header> */}
         <main>
             <Switch>
-              <Route exact path="/" component={FormsGame} />
+              <Route exact path="/" component={TextGame} />
               <Route exact path="/test" component={TextGame} />
               <Route exact path="/author" component={AuthorGame} />
             </Switch>

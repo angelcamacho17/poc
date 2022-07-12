@@ -67,6 +67,18 @@ class DragAndDropText extends Component {
         return i;
     } 
 
+    correctAnswers = () => {
+        let i = 0;
+
+        this.props.textOptions.map((option) => {
+            if (option.answer === 'correct') {
+                i++;
+            }
+        })
+
+        return i;
+    }
+
     onDrop = (ev, cat, answer) => {
         this.checkIfBoxIsEmpty(cat)
 
@@ -153,29 +165,43 @@ class DragAndDropText extends Component {
         })
 
         return (
-            <section className="questions-container">
-                {/* MAIN WRAPPER OF OPTIONS*/}
-                <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
-                        onDrop={(e)=>{this.onDrop(e, 'box', 'none')}}>
-                    <h4 className="header-container-box">
-                        Drag and Drop the right answer
-                    </h4>
-                    {this.state.options.box}
-                </div>
-                <div className="boxes-wrapper" >
-                    <div className="question">
-                        In general, what effect will soil litter have on.
+            <div>
+                <header className="questions-nav">
+                    <h2 className="no-margin">
+                        Ava Niyuyen 
+                    </h2>
+                    <div className="score">
+                        <img src={require('./../assets/star.png')}>
+                        </img>
+                        <span>
+                            {!this.testAnswered() ? this.correctAnswers(): 0}
+                        </span>
                     </div>
-                    <div className="boxes">
-                        {boxes}
+                </header>
+                <section className="questions-container">
+                    {/* MAIN WRAPPER OF OPTIONS*/}
+                    <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
+                            onDrop={(e)=>{this.onDrop(e, 'box', 'none')}}>
+                        <h4 className="header-container-box">
+                            Drag and Drop the right answer
+                        </h4>
+                        {this.state.options.box}
                     </div>
-                    <button onClick={this.checkAnswers} 
-                    disabled={this.testAnswered()}
-                    className={this.testAnswered() ? 'check-button disabled': 'check-button'}>
-                        Check
-                    </button>
-                </div>
-            </section>
+                    <div className="boxes-wrapper" >
+                        <div className="question">
+                            In general, what effect will soil litter have on.
+                        </div>
+                        <div className="boxes">
+                            {boxes}
+                        </div>
+                        <button onClick={this.checkAnswers} 
+                        disabled={this.testAnswered()}
+                        className={this.testAnswered() ? 'check-button disabled': 'check-button'}>
+                            Check
+                        </button>
+                    </div>
+                </section>
+            </div>
         )
     }
 }
