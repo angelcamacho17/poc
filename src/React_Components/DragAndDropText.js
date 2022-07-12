@@ -32,8 +32,7 @@ class DragAndDropText extends Component {
                     letter: "c",
                 },
             ],
-            check: false,
-            questionsAnswered: 0
+            check: false
         }
 
         this.onDragStart =  this.onDragStart.bind(this);
@@ -56,31 +55,35 @@ class DragAndDropText extends Component {
         }
     }
 
-    onAnsweringQuestion = (onAdd) => {
-        if (onAdd) {
-            this.setState({
-                questionsAnswered: this.state.questionsAnswered + 1
-            })
-        } else {
-            this.setState({
-                questionsAnswered: this.state.questionsAnswered - 1
-            })
-        }
-    }
+    answeredQuestions = () => {
+        let i = 0;
+
+        this.props.textOptions.map((option) => {
+            if (option.answer !== 'none') {
+                i++;
+            }
+        })
+
+        return i;
+    } 
 
     onDrop = (ev, cat, answer) => {
         this.checkIfBoxIsEmpty(cat)
+
+        if (!this.testAnswered()) {
+            this.setState({
+                check: false
+            })
+        }
+
         let name = ev.dataTransfer.getData("name");
         if (ev.dataTransfer.getData("name") === answer) {
             this.props.onCheckCorrect(name, cat);
-            this.onAnsweringQuestion(true);
         } else if(answer==='none') {
             this.props.onClear(name, cat)
-            this.onAnsweringQuestion(false);
 
         } else {
             this.props.onCheckIncorrect(name, cat)
-            this.onAnsweringQuestion(true);
         }
     }
 
@@ -103,7 +106,7 @@ class DragAndDropText extends Component {
     }
 
     testAnswered = () => {
-        return this.state.questionsAnswered !== this.props.textOptions.length;
+        return this.answeredQuestions() !== this.props.textOptions.length;
     }
 
     render() {
