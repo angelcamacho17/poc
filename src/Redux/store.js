@@ -32,10 +32,9 @@ export const store = createStore(
             {id: 3, name:"rectangle", category:"wip", bgcolor:"skyblue", answer: 'none'}
         ],
         textOptions: [
-            {id: 1, name:"option_1", category:"box", answer: 'none', text: 'text 1'},
-            {id: 2, name:"option_2", category:"box", answer: 'none', text: 'text 2'},
-            {id: 3, name:"option_3", category:"box", answer: 'none', text: 'text 3'},
-            {id: 4, name:"option_4", category:"box", answer: 'none', text: 'text 4'}
+            {id: 1, name:"option_1", category:"box", answer: 'none', text: 'Stay the same'},
+            {id: 2, name:"option_2", category:"box", answer: 'none', text: 'Decrease'},
+            {id: 3, name:"option_3", category:"box", answer: 'none', text: 'Increase'},
         ],
         blankOptions: [
             {id: 1, name:"option_1", category:"text", answer: 'none', text: 'blank 1'},

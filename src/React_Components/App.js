@@ -16,6 +16,7 @@ const canUseDOM = !!(
 );
 if (canUseDOM) {
   require('./App.css');
+  require('typeface-patrick-hand')
 }
 
 class App extends Component {

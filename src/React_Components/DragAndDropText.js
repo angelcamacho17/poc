@@ -10,51 +10,36 @@ class DragAndDropText extends Component {
             textBoxes: [
                 {
                     name: 'none',
-                    info: [],
+                    info: '',
                     answer: ""
                 },
                 {
                     name: 'box1',
-                    info: [
-                        'Lorem',
-                        'Lorem',
-                        'Text 1',
-                    ],
-                    answer: "option_1"
+                    info: 'Soil Moistrue',
+                    answer: "option_1",
+                    letter: "a",
                 },
                 {
                     name: 'box2',
-                    info: [
-                        'Lorem',
-                        'Lorem',
-                        ' Text 3',
-                    ],
-                    answer: "option_3"
+                    info: 'Soil Temperature',
+                    answer: "option_3",
+                    letter: "b",
                 },
                 {
                     name: 'box3',
-                    info: [
-                        'Lorem',
-                        'Lorem',
-                        'Text 4',
-                    ],
-                    answer: "option_4"
+                    info:  'Number of Soil Animals',
+                    answer: "option_2",
+                    letter: "c",
                 },
-                {
-                    name: 'box4',
-                    info: [
-                        'Lorem',
-                        'Lorem',
-                        'Text 2',
-                    ],
-                    answer: "option_2"
-                }
             ],
+            check: false,
+            questionsAnswered: 0
         }
 
         this.onDragStart =  this.onDragStart.bind(this);
         this.onDragOver =  this.onDragOver.bind(this);
         this.onDrop =  this.onDrop.bind(this);
+        this.checkAnswers = this.checkAnswers.bind(this);
     }
 
     onDragStart = (ev, name) => {
@@ -71,15 +56,31 @@ class DragAndDropText extends Component {
         }
     }
 
+    onAnsweringQuestion = (onAdd) => {
+        if (onAdd) {
+            this.setState({
+                questionsAnswered: this.state.questionsAnswered + 1
+            })
+        } else {
+            this.setState({
+                questionsAnswered: this.state.questionsAnswered - 1
+            })
+        }
+    }
+
     onDrop = (ev, cat, answer) => {
         this.checkIfBoxIsEmpty(cat)
         let name = ev.dataTransfer.getData("name");
         if (ev.dataTransfer.getData("name") === answer) {
-            this.props.onCheckCorrect(name, cat)
+            this.props.onCheckCorrect(name, cat);
+            this.onAnsweringQuestion(true);
         } else if(answer==='none') {
             this.props.onClear(name, cat)
+            this.onAnsweringQuestion(false);
+
         } else {
             this.props.onCheckIncorrect(name, cat)
+            this.onAnsweringQuestion(true);
         }
     }
 
@@ -87,8 +88,22 @@ class DragAndDropText extends Component {
         const options = this.props.textOptions.filter(ques => ques.name === form)
         const ans = options.length > 0 ? options[0].answer: 'none';
         if (ans === 'none') return 'option';
-        if (ans === 'correct') return 'option correct no-margin'
-        if (ans === 'incorrect') return 'option incorrect no-margin';
+        if (this.state.check) {
+            if (ans === 'correct') return 'option correct no-margin'
+            if (ans === 'incorrect') return 'option incorrect no-margin';
+        } else {
+            return 'option no-margin'
+        }
+    }
+
+    checkAnswers = () => {
+        this.setState({
+            check: !this.state.check
+        })
+    }
+
+    testAnswered = () => {
+        return this.state.questionsAnswered !== this.props.textOptions.length;
     }
 
     render() {
@@ -99,7 +114,6 @@ class DragAndDropText extends Component {
             box1: [],
             box2: [],
             box3: [],
-            box4: [],
         }
 
         // OPTIONS TO PLACE INSIDE THE BOXES, MARKED AS DRAGGABLE
@@ -117,9 +131,12 @@ class DragAndDropText extends Component {
 
         // BUILDING OF BOXES WITH THE OPTONS OBJECTS UPDATED
         this.state.textBoxes.forEach((box)=>{
-            if (box.info.length > 0) {
+            if (box.info) {
                 boxes.push(
                     <div key={box.name + '-answer'} className="box" >
+                        <div>
+                            {box.letter + '. ' + box.info}
+                        </div>
                         <div key={box.name}
                             className="answer"
                             onDragOver={(e)=>this.onDragOver(e)}
@@ -127,32 +144,35 @@ class DragAndDropText extends Component {
                             >
                                 {this.state.options[box.name]}
                         </div>          
-                        <ul>
-                            {box.info.map((line, index)=>{
-                                return <li key={index}>{line}</li>
-                            })}
-                        </ul>
                     </div>
                 )
             }
         })
 
         return (
-            <div className="questions-container">
-                <h4>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                </h4>
-                <section>
-                    {/* MAIN WRAPPER OF OPTIONS*/}
-                    <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
-                            onDrop={(e)=>{this.onDrop(e, 'box', 'none')}}>
-                        {this.state.options.box}
+            <section className="questions-container">
+                {/* MAIN WRAPPER OF OPTIONS*/}
+                <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
+                        onDrop={(e)=>{this.onDrop(e, 'box', 'none')}}>
+                    <h4 className="header-container-box">
+                        Drag and Drop the right answer
+                    </h4>
+                    {this.state.options.box}
+                </div>
+                <div className="boxes-wrapper" >
+                    <div className="question">
+                        In general, what effect will soil litter have on.
                     </div>
-                    <div className="boxes-wrapper" >
+                    <div className="boxes">
                         {boxes}
                     </div>
-                </section>
-            </div>
+                    <button onClick={this.checkAnswers} 
+                    disabled={this.testAnswered()}
+                    className={this.testAnswered() ? 'check-button disabled': 'check-button'}>
+                        Check
+                    </button>
+                </div>
+            </section>
         )
     }
 }

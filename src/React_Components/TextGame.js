@@ -8,11 +8,8 @@ class TextGame extends Component {
     render() {
         return (
             <div >
-                <div className="text-game">
-                    <img src={require('./../assets/photosintesis.jpg')} />
-                    <DragAndDropText/>
-                </div>
-                <DragAndDropBlankSpace/>
+                <DragAndDropText/>
+                {/* <DragAndDropBlankSpace/> */}
             </div>
         );
     }

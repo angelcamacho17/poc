@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { checkCorrect, checkInCorrect, loadQuestions, checkNone } from '../Redux/actions/checkResponse';
 import { connect } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { store } from '../Redux/store';
-import { withRouter } from 'react-router-dom';
-import Score from './Score';
 
 class DragAndDrop extends Component {
     constructor(props) {

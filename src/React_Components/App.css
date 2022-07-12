@@ -4,6 +4,8 @@
   padding: 15px;
   padding-top: 100px;
   box-sizing: border-box;
+  font-family: 'Patrick Hand';
+  letter-spacing: 2px;
 }
 
 .container-drag {
@@ -61,6 +63,10 @@ span {
   line-height: 24px
 }
 
+.w-100 {
+  width: 100%;
+}
+
 .blank-space {
   border: 2px black solid;
   min-height: 24px;
@@ -70,14 +76,14 @@ span {
 }
 
 .answer {
-  border: 2px black solid;
+  border: 3px rgba(4, 118, 205, 0.2) dashed;
   min-height: 35px;
-  width: 100%;
-  position: absolute;
+  min-width: 150px;
   top: 0;
   box-sizing: border-box;
   left: 0;
-  margin-right: 15px;
+  border-radius: 4px;
+  margin-left: 20px;
 }
 
 .circle {
@@ -94,13 +100,6 @@ span {
   margin: 5px auto;
   line-height: 5em;
   border: 1px solid rgba(0, 0, 0, 0.6);
-}
-
-.option {
-  height: auto;
-  width: auto;
-  border: 1px solid black;
-  z-index: 1000;
 }
 
 nav {
@@ -136,12 +135,13 @@ a {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  align-items: center;
-  padding: 20px 0;
+  align-items: start;
+  padding: 0 15px;
+  flex-flow: column;
 }
 
 .no-margin {
-  margin-right: 0 !important;
+  margin: 0 !important;
 }
 
 .text-game .divider {
@@ -152,13 +152,13 @@ a {
 }
 
 .box {
+  display: flex;
   position: relative;
-  padding: 20px 30px;
   width: 100%;
-  max-width: 200px;
-  margin: 10px;
-  padding-top: 45px;
-  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  margin: 10px 0;
+  align-items: center;
+  font-size: 18px;
 }
 
 ul {
@@ -167,42 +167,66 @@ ul {
 
 .questions-container {
   display: flex;
-  flex-flow: column;
   justify-content: space-between;
   width: 100%;
   /* align-items: center; */
   text-align: center;
-  border: 2px dashed rgba(0, 0, 0, 0.2);
   margin: 20px 0;
   box-sizing: border-box;
   padding: 30px;
 }
 
+.question {
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.boxes {
+  margin-bottom: 20px;
+}
 
 .answers-wrapper {
   display: flex;
   width: 100%;
   align-items: center;
+  flex-flow: column;
+  border: 4px rgba(4, 118, 205, 0.2) dashed;
+  border-radius: 10px;
+  padding: 20px 15px;
+  box-sizing: border-box;
 }
 
 .option {
   padding: 4px 20px;
   background: rgb(224 232 255);
-  border: 3px solid rgb(52 124 242);
   text-align: center;
   border-radius: 5px;
   min-height: max-content;
-  margin-right: 15px;
+  margin-bottom: 15px;
+  background: rgba(4, 118, 205, 0.15);
+  border-bottom: 3px rgb(4, 118, 205) solid;
+  min-width: 140px;
+  color: rgb(4, 118, 205);
+  font-weight: 700;
+}
+
+.option:active {
+  background: hsl(206deg 89% 61% / 65%);;
 }
 
 .correct {
   border: 2px rgb(28, 156, 28) dotted;
   background: rgb(185, 251, 185);
+  margin: 0;
+  color: rgb(28, 156, 28);
 }
 
 .incorrect {
   border: 2px rgb(173, 26, 26) dotted;
+  color: rgb(173, 26, 26);
   background: rgb(255, 180, 180);
+  margin: 0;
 }
 
 .text-game {
@@ -220,6 +244,13 @@ ul {
 .text-game h4 {
   max-width: 800px;
   text-align: initial;
+}
+
+.header-container-box {
+  color: rgb(4, 118, 205);
+  font-size: 22px;
+  margin-top: 12px;
+  margin-bottom: 35px;
 }
 
 .author-form {
@@ -345,4 +376,22 @@ ul {
 .radio-wrapper {
   display: flex;
   align-items: center;
+}
+
+.check-button {
+  background-color: rgb(156, 0, 156);
+  color: #fff;
+  border-radius: 30px;
+  padding: 13px 32px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: 'Patrick Hand';
+  letter-spacing: 2px;
+
+}
+
+.disabled {
+  color: rgb(255 255 255 / 40%);
+  cursor: no-drop;
 }
