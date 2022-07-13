@@ -189,7 +189,7 @@ class DragAndDropText extends Component {
                     <div className="score">
                         <img src={require('./../assets/star.png')}/>
                         <span>
-                            {!this.testAnswered() ? this.correctAnswers(): 0}
+                            { (this.testAnswered() && this.state.check) ? this.correctAnswers(): 0}
                         </span>
                     </div>
                 </header>
