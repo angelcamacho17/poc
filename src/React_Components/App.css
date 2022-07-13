@@ -1,3 +1,5 @@
+/* APPLICATION CSS*/
+
 .App {
   text-align: center;
   width: 100%;
@@ -9,13 +11,195 @@
   letter-spacing: 2px;
 }
 
-.container-drag {
+.w-100 {
+  width: 100%;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+/* END APPLICATION CSS*/
+
+/* DRAG AND DROP GENERAL CSS */
+
+.answer {
+  border: 3px rgba(4, 118, 205, 0.2) dashed;
+  min-height: 35px;
+  min-width: 150px;
+  top: 0;
+  box-sizing: border-box;
+  left: 0;
+  border-radius: 4px;
+  margin-left: 20px;
+}
+
+.box {
+  display: flex;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
+  align-items: center;
+  font-size: 18px;
+}
+
+.option {
+  padding: 4px 20px;
+  background: rgb(224 232 255);
+  text-align: center;
+  border-radius: 5px;
+  min-height: max-content;
+  margin-bottom: 15px;
+  background: rgba(4, 118, 205, 0.15);
+  border-bottom: 3px rgb(4, 118, 205) solid;
+  min-width: 140px;
+  color: rgb(4, 118, 205);
+  font-weight: 700;
+}
+
+.option:active {
+  background: hsl(206deg 89% 61% / 65%);;
+}
+
+.correct {
+  border: 2px rgb(28, 156, 28) dotted;
+  background: rgb(185, 251, 185);
+  margin: 0;
+  color: rgb(28, 156, 28);
+}
+
+.incorrect {
+  border: 2px rgb(173, 26, 26) dotted;
+  color: rgb(173, 26, 26);
+  background: rgb(255, 180, 180);
+  margin: 0;
+}
+
+/* END DRAG AND DROP GENERAL CSS */
+
+/* ACTIVITY CSS */
+
+.questions-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  align-items: center;
   text-align: center;
+  margin: 20px 0;
+  box-sizing: border-box;
+  padding: 30px;
+  padding-top: 0;
 }
+
+.question {
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.questions-nav h2 {
+  margin-right: 15px;
+}
+
+.questions-nav {
+  display: flex;
+  font-size: 28px;
+  align-items: center;
+  font-weight: bolder;
+  padding: 20px 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin-bottom: 15px;
+}
+
+.score {
+  position: relative;
+}
+
+.score img {
+  height: 70px;
+}
+
+.score span {
+  position: absolute;
+  top: 25px;
+  left: 29px;
+  color: #b17300;;
+  z-index: 1000;
+}
+
+.navigation-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.arrow {
+  height: 50px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.button {
+  border-radius: 30px;
+  padding: 13px 32px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: 'Patrick Hand';
+  letter-spacing: 2px;
+
+}
+
+.check {
+  background-color: rgb(156, 0, 156);
+  color: #fff;
+}
+
+.try-again {
+  color: rgb(156, 0, 156);
+  background: #fff;
+}
+
+.disabled {
+  color: rgb(255 255 255 / 40%);
+  cursor: no-drop;
+}
+
+.boxes-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: start;
+  padding: 0 15px;
+  flex-flow: column;
+}
+
+.boxes {
+  margin-bottom: 20px;
+}
+
+.answers-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-flow: column;
+  border: 4px rgba(4, 118, 205, 0.2) dashed;
+  border-radius: 10px;
+  padding: 20px 15px;
+  box-sizing: border-box;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+/* END ACTIVITY CSS */
 
 .wip {
   position: relative;
@@ -64,27 +248,12 @@ span {
   line-height: 24px
 }
 
-.w-100 {
-  width: 100%;
-}
-
 .blank-space {
   border: 2px black solid;
   min-height: 24px;
   box-sizing: border-box;
   min-width: 100px;
   display: inline-flex;
-}
-
-.answer {
-  border: 3px rgba(4, 118, 205, 0.2) dashed;
-  min-height: 35px;
-  min-width: 150px;
-  top: 0;
-  box-sizing: border-box;
-  left: 0;
-  border-radius: 4px;
-  margin-left: 20px;
 }
 
 .circle {
@@ -132,18 +301,7 @@ a {
 }
 
 
-.boxes-wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  align-items: start;
-  padding: 0 15px;
-  flex-flow: column;
-}
 
-.no-margin {
-  margin: 0 !important;
-}
 
 .text-game .divider {
   position: relative;
@@ -152,83 +310,11 @@ a {
   content: none;
 }
 
-.box {
-  display: flex;
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 10px 0;
-  align-items: center;
-  font-size: 18px;
-}
-
 ul {
   padding-left: 12px;
 }
 
-.questions-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  /* align-items: center; */
-  text-align: center;
-  margin: 20px 0;
-  box-sizing: border-box;
-  padding: 30px;
-}
 
-.question {
-  font-weight: bold;
-  font-size: 30px;
-  margin-bottom: 20px;
-}
-
-.boxes {
-  margin-bottom: 20px;
-}
-
-.answers-wrapper {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  flex-flow: column;
-  border: 4px rgba(4, 118, 205, 0.2) dashed;
-  border-radius: 10px;
-  padding: 20px 15px;
-  box-sizing: border-box;
-}
-
-.option {
-  padding: 4px 20px;
-  background: rgb(224 232 255);
-  text-align: center;
-  border-radius: 5px;
-  min-height: max-content;
-  margin-bottom: 15px;
-  background: rgba(4, 118, 205, 0.15);
-  border-bottom: 3px rgb(4, 118, 205) solid;
-  min-width: 140px;
-  color: rgb(4, 118, 205);
-  font-weight: 700;
-}
-
-.option:active {
-  background: hsl(206deg 89% 61% / 65%);;
-}
-
-.correct {
-  border: 2px rgb(28, 156, 28) dotted;
-  background: rgb(185, 251, 185);
-  margin: 0;
-  color: rgb(28, 156, 28);
-}
-
-.incorrect {
-  border: 2px rgb(173, 26, 26) dotted;
-  color: rgb(173, 26, 26);
-  background: rgb(255, 180, 180);
-  margin: 0;
-}
 
 .text-game {
   display: flex;
@@ -379,49 +465,10 @@ ul {
   align-items: center;
 }
 
-.check-button {
-  background-color: rgb(156, 0, 156);
-  color: #fff;
-  border-radius: 30px;
-  padding: 13px 32px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 22px;
-  font-family: 'Patrick Hand';
-  letter-spacing: 2px;
-
-}
-
-.disabled {
-  color: rgb(255 255 255 / 40%);
-  cursor: no-drop;
-}
-
-.questions-nav {
+.container-drag {
   display: flex;
-  font-size: 28px;
+  justify-content: space-between;
+  width: 100%;
   align-items: center;
-  font-weight: bolder;
-  padding: 20px 25px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.score {
-  position: relative;
-}
-
-.score img {
-  height: 70px;
-}
-
-.score span {
-  position: absolute;
-  top: 25px;
-  left: 29px;
-  color: #fff;
-  z-index: 1000;
-}
-
-.questions-nav h2 {
-  margin-right: 15px;
+  text-align: center;
 }

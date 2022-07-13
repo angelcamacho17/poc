@@ -1,4 +1,4 @@
-import { OPTION_CORRECT, OPTION_INCORRECT, OPTION_NONE } from '../actions/textOptionActions';
+import { OPTION_CORRECT, OPTION_INCORRECT, OPTION_NONE, RESET } from '../actions/textOptionActions';
 
 // null is set as the default value here for state, because Redux will complain if state is undefined. 
 // You can set initial state here, but it is recommended on the Redux documentation to preload the state within the redux store. 
@@ -47,6 +47,16 @@ export default function textOptionsReducer(state =  null, action) {
                     }
                 }
             ); 
+        case RESET: 
+            return state.map(question => {
+                const answeredQuestion = {
+                    ...question,
+                    answer: 'none',
+                    category: 'box'
+                }
+                    return answeredQuestion;
+                }
+            );
         default:
             return state;
     }

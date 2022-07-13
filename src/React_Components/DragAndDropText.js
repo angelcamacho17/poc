@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { optionCorrect, optionIncorrect, optionNone } from '../Redux/actions/textOptionActions';
+import { optionCorrect, optionIncorrect, optionNone, reset } from '../Redux/actions/textOptionActions';
 import { connect } from 'react-redux';
 
 class DragAndDropText extends Component {
@@ -55,6 +55,7 @@ class DragAndDropText extends Component {
         }
     }
 
+    // Calculate the answered questions.
     answeredQuestions = () => {
         let i = 0;
 
@@ -67,6 +68,7 @@ class DragAndDropText extends Component {
         return i;
     } 
 
+    // Calculate correct answers.
     correctAnswers = () => {
         let i = 0;
 
@@ -79,10 +81,13 @@ class DragAndDropText extends Component {
         return i;
     }
 
+    // Handle on drop event for droppable elements.
     onDrop = (ev, cat, answer) => {
         this.checkIfBoxIsEmpty(cat)
 
-        if (!this.testAnswered()) {
+        // If the test is not completely answered,
+        // disabled check button.
+        if (this.testAnswered()) {
             this.setState({
                 check: false
             })
@@ -117,8 +122,19 @@ class DragAndDropText extends Component {
         })
     }
 
+    tryAgain = () => {
+        this.setState({
+            check: false
+        })
+        this.props.onReset();
+    }
+
     testAnswered = () => {
-        return this.answeredQuestions() !== this.props.textOptions.length;
+        return (this.answeredQuestions() === this.props.textOptions.length);
+    }
+
+    shouldTryAgain = () => {
+        return this.testAnswered() && this.state.check && (this.correctAnswers()!==this.props.textOptions.length);
     }
 
     render() {
@@ -171,13 +187,16 @@ class DragAndDropText extends Component {
                         Ava Niyuyen 
                     </h2>
                     <div className="score">
-                        <img src={require('./../assets/star.png')}>
-                        </img>
+                        <img src={require('./../assets/star.png')}/>
                         <span>
                             {!this.testAnswered() ? this.correctAnswers(): 0}
                         </span>
                     </div>
                 </header>
+                <div className="navigation-buttons">
+                    <img className="arrow rotated" src={require('./../assets/arrow.png')}/>
+                    <img className="arrow" src={require('./../assets/arrow.png')}/>
+                </div>
                 <section className="questions-container">
                     {/* MAIN WRAPPER OF OPTIONS*/}
                     <div className="answers-wrapper" onDragOver={(e)=>this.onDragOver(e)}
@@ -194,11 +213,22 @@ class DragAndDropText extends Component {
                         <div className="boxes">
                             {boxes}
                         </div>
-                        <button onClick={this.checkAnswers} 
-                        disabled={this.testAnswered()}
-                        className={this.testAnswered() ? 'check-button disabled': 'check-button'}>
-                            Check
-                        </button>
+
+                        <div className="buttons">
+                            <button onClick={this.checkAnswers} 
+                            disabled={!this.testAnswered()}
+                            className={this.testAnswered() ? 'check button': 'check button disabled'}>
+                                Check
+                            </button>
+
+                            { this.shouldTryAgain()?
+                                <button onClick={this.tryAgain} 
+                                    className="try-again button">
+                                        Try Again
+                                </button>: <span></span>
+                            }
+                        </div>
+
                     </div>
                 </section>
             </div>
@@ -217,7 +247,8 @@ const mapStateToProps = (state, props) =>{
 const mapActionsToProps = {
     onCheckCorrect: optionCorrect,
     onCheckIncorrect: optionIncorrect,
-    onClear: optionNone
+    onClear: optionNone,
+    onReset: reset,
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(DragAndDropText);

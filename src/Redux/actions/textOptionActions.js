@@ -1,6 +1,7 @@
 export const OPTION_CORRECT = 'OPTION_CORRECT';
 export const OPTION_INCORRECT = 'OPTION_INCORRECT';
 export const OPTION_NONE = 'OPTION_NONE';
+export const RESET = 'RESET';
 
 
 export const optionCorrect = (id, category) => ({
@@ -17,4 +18,7 @@ export const optionIncorrect = (id, category) => ({
 export const optionNone = (id, category) => ({
     type: OPTION_NONE,
     id
+});
+export const reset = () => ({
+    type: RESET
 });
